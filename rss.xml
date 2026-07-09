@@ -6,8 +6,32 @@
     <atom:link href="https://dashy.to/rss.xml" rel="self" type="application/rss+xml" />
     <description>New releases and version tags for Dashy, the self-hosted dashboard for your homelab.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 04 Jul 2026 19:42:07 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 09:17:56 GMT</lastBuildDate>
     <generator>dashy-docs github-data plugin</generator>
+    <item>
+      <title>4.4.2</title>
+      <link>https://github.com/lissy93/dashy/releases/tag/4.4.2</link>
+      <guid isPermaLink="true">https://github.com/lissy93/dashy/releases/tag/4.4.2</guid>
+      <pubDate>Thu, 09 Jul 2026 09:04:11 GMT</pubDate>
+      <category>Tag</category>
+      <description>Tag 4.4.2</description>
+    </item>
+    <item>
+      <title>4.4.1</title>
+      <link>https://github.com/lissy93/dashy/releases/tag/4.4.1</link>
+      <guid isPermaLink="true">https://github.com/lissy93/dashy/releases/tag/4.4.1</guid>
+      <pubDate>Wed, 08 Jul 2026 21:06:14 GMT</pubDate>
+      <category>Tag</category>
+      <description>Tag 4.4.1</description>
+    </item>
+    <item>
+      <title>Release 4.4.0</title>
+      <link>https://github.com/lissy93/dashy/releases/tag/4.4.0</link>
+      <guid isPermaLink="true">https://github.com/lissy93/dashy/releases/tag/4.4.0</guid>
+      <pubDate>Sat, 04 Jul 2026 19:55:22 GMT</pubDate>
+      <category>Release</category>
+      <description>What&apos;s Changed  Custom API widget by @lissy93 in https://github.com/lissy93/dashy/pull/2197  Bump the minor-and-patch group with 11 updates by @dependabot[bot] in https://github.com/lissy93/dashy/pu</description>
+    </item>
     <item>
       <title>4.3.15</title>
       <link>https://github.com/lissy93/dashy/releases/tag/4.3.15</link>
