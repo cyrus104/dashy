@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from '@docusaurus/Link';
 import styles from '../styles/DeploymentMethods.module.scss';
+import authorStyles from '../styles/Authors.module.scss';
 
 const icon = (file) => `https://pixelflare.cc/alicia/icons/${file}/w128`;
 
@@ -56,8 +57,7 @@ function MethodIcon({ src, name }) {
     <img
       src={src}
       alt=""
-      width="56"
-      height="56"
+      height="48"
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}
@@ -73,12 +73,12 @@ function MethodCard({ method }) {
   return (
     <Link
       to={method.externalLink || method.link}
-      className={styles.card}
+      className={`${authorStyles.tile} ${styles.card}`}
       title={title}
       {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
     >
       <MethodIcon src={method.icon} name={method.name} />
-      <span className={styles.name}>{method.name}</span>
+      <span className={authorStyles.name}>{method.name}</span>
       {method.official && <span className={styles.official} title="Officially supported">official</span>}
       {external && <span className={styles.external} aria-hidden="true">↗</span>}
     </Link>
@@ -105,7 +105,7 @@ export default function DeploymentMethods() {
           {['All', 'Official', ...CATEGORIES].map((c) => <option key={c}>{c}</option>)}
         </select>
       </div>
-      <div className={styles.grid}>
+      <div className={authorStyles.grid}>
         {visible.map((m) => <MethodCard key={m.name} method={m} />)}
       </div>
     </nav>

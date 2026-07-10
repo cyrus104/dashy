@@ -62,6 +62,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.6rem;
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--background);
   text-decoration: none;
@@ -74,6 +75,12 @@
     box-shadow: var(--feature-img-shadow);
     text-decoration: none;
     color: var(--text-color);
+  }
+
+  &:active {
+    border-color: var(--primary);
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
   }
 }
 
