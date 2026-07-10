@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-security" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.1">
+<title data-rh="true">Security | Dashy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="dashy, dashboard, homelab, self-hosted, docker, homepage"><meta data-rh="true" property="og:type" content="website"><meta data-rh="true" property="og:url" content="https://dashy.to"><meta data-rh="true" property="og:image" content="https://dashy.to/img/dashy.png"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="twitter:title" content="Dashy — The Ultimate Homepage for your Homelab"><meta data-rh="true" name="twitter:description" content="Dashy is a self-hosted dashboard app for your homelab. Manage all your services, with status checks, widgets, themes and more."><meta data-rh="true" name="twitter:image" content="https://dashy.to/img/dashy.png"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Security | Dashy"><meta data-rh="true" name="description" content="Contents"><meta data-rh="true" property="og:description" content="Contents"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://dashy.to/docs/security"><link data-rh="true" rel="alternate" href="https://dashy.to/docs/security" hreflang="en"><link data-rh="true" rel="alternate" href="https://dashy.to/docs/security" hreflang="x-default"><link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#54bff7">
+<link rel="apple-touch-icon" href="/img/dashy.png">
+
+
+<link rel="preconnect" href="https://pixelflare.cc">
+<link rel="preconnect" href="https://cdn.as93.net">
+<link rel="dns-prefetch" href="https://api.github.com">
+<link rel="dns-prefetch" href="https://no-track.as93.net">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Dashy","url":"https://dashy.to","description":"The Ultimate Homepage for your Homelab","publisher":{"@type":"Person","name":"Alicia Sykes","url":"https://aliciasykes.com"}}</script>
+<link rel="alternate" type="application/rss+xml" title="Dashy — Releases &amp; Updates" href="/rss.xml">
+<script src="https://no-track.as93.net/js/script.js" defer="defer" data-domain="dashy.to"></script><link rel="stylesheet" href="/assets/css/styles.ccbcaeb4.css">
+<script src="/assets/js/runtime~main.5cd90584.js" defer="defer"></script>
+<script src="/assets/js/main.f1866b06.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div class="banner_woPo"><a class="link_ecgS" title="View the changelog, to see what&#x27;s new!" href="/updates">Dashy <!-- -->V4.4.4<!-- --> is now live 🚀</a><a class="link2_y3x6" title="View the changelog, to see what&#x27;s new!" href="/updates">See what&#x27;s new…</a><button class="closeBtn_fC0A" title="Dismiss update, and don&#x27;t show again" aria-label="Dismiss update, and don&#x27;t show again">×</button></div><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top navbarHideable_m1mJ"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/dashy.png" alt="Dashy Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/dashy.png" alt="Dashy Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Dashy</b></a><a href="https://github.com/lissy93/dashy" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://demo.dashy.to" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Live Demo<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a class="navbar__item navbar__link" href="/docs/quick-start">Quick Start</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs">Documentation</a><a class="navbar__item navbar__link" href="/api">API</a><a class="navbar__item navbar__link" href="/updates">Changelog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Security</h1></header>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="contents">Contents<a href="#contents" class="hash-link" aria-label="Direct link to Contents" title="Direct link to Contents" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="#dependencies" class="">Dependencies</a></li>
+<li class=""><a href="#securing-your-environment" class="">Securing your Environment</a></li>
+<li class=""><a href="#security-features" class="">Security Features</a>
+<ul>
+<li class=""><a href="#verifiable-transparent-releases" class="">Verifiable Releases</a></li>
+<li class=""><a href="#supply-chain" class="">Supply Chain</a></li>
+<li class=""><a href="#subresource-integrity" class="">Subresource Integrity</a></li>
+<li class=""><a href="#ssl" class="">SSL</a></li>
+<li class=""><a href="#authentication" class="">Authentication</a></li>
+<li class=""><a href="#configuration-lockdown" class="">Configuration Lockdown</a></li>
+<li class=""><a href="#disabling-features" class="">Disabling Features</a></li>
+<li class=""><a href="#docker-images" class="">Docker Security</a></li>
+</ul>
+</li>
+<li class=""><a href="#threat-model" class="">Threat Model</a>
+<ul>
+<li class=""><a href="#intended-deployment" class="">Intended Deployment</a></li>
+<li class=""><a href="#trust-boundaries" class="">Trust Boundaries</a></li>
+<li class=""><a href="#assets" class="">Assets</a></li>
+<li class=""><a href="#when-dashy-is-not-the-right-choice" class="">When Dashy is NOT the Right Choice</a></li>
+</ul>
+</li>
+<li class=""><a href="#update--patch-policy" class="">Update &amp; Patch Policy</a></li>
+<li class=""><a href="#known-limitations" class="">Known Limitations</a></li>
+<li class=""><a href="#reporting-a-security-issue" class="">Reporting a Security Issue</a></li>
+<li class=""><a href="#non-issues" class="">Non-Issues</a>
+<ul>
+<li class=""><a href="#false-positives" class="">False Positives</a></li>
+<li class=""><a href="#out-of-scope" class="">Out-of-Scope</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dependencies">Dependencies<a href="#dependencies" class="hash-link" aria-label="Direct link to Dependencies" title="Direct link to Dependencies" translate="no">​</a></h2>
+<p>Like most web projects, Dashy builds on a number of open source <a class="" href="/docs/credits#dependencies">dependencies</a>. We keep a close eye on them, to ensure the distributed app is always safe from known issues.</p>
+<p>Every package is pinned in a lockfile and installed with integrity checks, so builds are reproducible and nothing gets silently swapped out. Dependabot raises update PRs weekly (covering packages, GitHub Actions, Docker and dev containers). We also have a CI gate for whenever the lockfile changes, to block the merging of any dep with any known issue. Builds are also scanned with Trivy, commits are checked for leaked secrets with TruffleHog, and the CI workflows themselves are linted and zizmor audited.</p>
+<p>Releases and Docker images are published with signed build provenance and an SBOM, so you can verify that what you&#x27;re running really did come from us. The <code>:latest</code> docker image is updated at a minimum weekly, so dependencies are up-to-date.</p>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="securing-your-environment">Securing your Environment<a href="#securing-your-environment" class="hash-link" aria-label="Direct link to Securing your Environment" title="Direct link to Securing your Environment" translate="no">​</a></h2>
+<p>There is very little complexity involved with Dashy, and therefore the attack surface is reasonably small, but it is still important to follow best practices for all your self-hosted apps:</p>
+<ul>
+<li class=""><strong>Use SSL/HTTPS</strong> for securing traffic in transit, see <a class="" href="/docs/management#ssl-certificates">Management Docs: SSL Certificates</a></li>
+<li class=""><strong>Configure authentication</strong> to prevent unauthorized access, see <a class="" href="/docs/authentication">Authentication Docs</a>. For internet-facing instances, use <a class="" href="/docs/authentication#keycloak">Keycloak</a>, <a class="" href="/docs/authentication#oidc">OIDC</a>, or an <a class="" href="/docs/authentication#alternative-authentication-methods">alternative server-side method</a></li>
+<li class=""><strong>Place behind a reverse proxy</strong> if exposing to the internet, see <a class="" href="/docs/management#network-exposure">Management Docs: Network Exposure</a></li>
+<li class=""><strong>Harden your containers</strong> if running in Docker, see <a class="" href="/docs/management#container-security">Management Docs: Container Security</a></li>
+<li class=""><strong>Keep Dashy and your system up-to-date</strong> to ensure known vulnerabilities are patched</li>
+<li class=""><strong>Configure firewall rules</strong> to restrict access to only necessary ports and networks</li>
+<li class=""><strong>Use a VPN</strong> for private access without exposing Dashy to the public internet</li>
+<li class=""><strong>Follow <a href="https://docs.docker.com/engine/security/" target="_blank" rel="noopener noreferrer" class="">Docker security best practices</a></strong> including running as non-root, limiting capabilities, and using read-only volumes</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="security-features">Security Features<a href="#security-features" class="hash-link" aria-label="Direct link to Security Features" title="Direct link to Security Features" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="verifiable-transparent-releases">Verifiable Transparent Releases<a href="#verifiable-transparent-releases" class="hash-link" aria-label="Direct link to Verifiable Transparent Releases" title="Direct link to Verifiable Transparent Releases" translate="no">​</a></h3>
+<p>Every release is built in the open by GitHub Actions, never by hand. Each build produces a signed provenance attestation (keyless, tied to GitHub&#x27;s OIDC identity), so you can confirm that the copy of Dashy you&#x27;re running was built by our CI, from this repo, and hasn&#x27;t been altered since. Release tarballs also ship with a SHA256 checksum.</p>
+<p>You can browse every attestation on the <a href="https://github.com/lissy93/dashy/attestations" target="_blank" rel="noopener noreferrer" class="">attestations page</a>, or verify a download yourself with <code>gh attestation verify</code>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="supply-chain">Supply Chain<a href="#supply-chain" class="hash-link" aria-label="Direct link to Supply Chain" title="Direct link to Supply Chain" translate="no">​</a></h3>
+<p>Each build also publishes a Software Bill of Materials (SBOM), a full manifest of every package that went into the app. Together with the provenance above, that gives you an auditable record of exactly what is inside. Images are scanned for known vulnerabilities with Trivy before they go out, and our dependencies are monitored continuously (see <a href="#dependencies" class="">Dependencies</a>).</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="subresource-integrity">Subresource Integrity<a href="#subresource-integrity" class="hash-link" aria-label="Direct link to Subresource Integrity" title="Direct link to Subresource Integrity" translate="no">​</a></h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener noreferrer" class="">Subresource Integrity</a> or SRI is a security feature that enables browsers to verify that resources they fetch are delivered without unexpected manipulation. It works by allowing you to provide a cryptographic hash that a fetched resource must match. This prevents the app from loading any resources that have been manipulated, by verifying the files hashes. It safeguards against the risk of an attacker injecting arbitrary malicious content into any files served up via a CDN.</p>
+<p>Dashy supports SRI, and it is recommended to enable this if you are hosting your dashboard via a public CDN. To enable SRI, set the <code>INTEGRITY</code> environmental variable to <code>true</code>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ssl">SSL<a href="#ssl" class="hash-link" aria-label="Direct link to SSL" title="Direct link to SSL" translate="no">​</a></h3>
+<p>Native SSL support is enabled, for setup instructions, see the <a class="" href="/docs/management#ssl-certificates">Management Docs</a></p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="authentication">Authentication<a href="#authentication" class="hash-link" aria-label="Direct link to Authentication" title="Direct link to Authentication" translate="no">​</a></h3>
+<p>Dashy supports built-in auth, server-based SSO using Keycloak or any OIDC provider, and header-based authentication for reverse proxy setups. Full details of which, along with alternate authentication methods can be found in the <a class="" href="/docs/authentication">Authentication Docs</a>. If your dashboard is exposed to the internet and/ or contains any sensitive info it is strongly recommended to configure access control with Keycloak, OIDC, or another server-side method.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="configuration-lockdown">Configuration Lockdown<a href="#configuration-lockdown" class="hash-link" aria-label="Direct link to Configuration Lockdown" title="Direct link to Configuration Lockdown" translate="no">​</a></h3>
+<p>Dashy provides several options to restrict what users can modify:</p>
+<ul>
+<li class=""><code>appConfig.preventWriteToDisk</code> - Prevents config changes from being saved to the server</li>
+<li class=""><code>appConfig.preventLocalSave</code> - Prevents config changes from being saved to browser storage</li>
+<li class=""><code>appConfig.disableConfiguration</code> - Hides the config UI from all users</li>
+<li class=""><code>appConfig.disableConfigurationForNonAdmin</code> - Hides the config UI for non-admin users</li>
+</ul>
+<p>These can be combined with the <code>admin</code> and <code>normal</code> user roles to give fine-grained control. Admin users can save config changes, while normal users have read-only access. For more details, see <a class="" href="/docs/authentication/built-in#user-roles--visibility">Built-In Auth: User Roles</a>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="disabling-features">Disabling Features<a href="#disabling-features" class="hash-link" aria-label="Direct link to Disabling Features" title="Direct link to Disabling Features" translate="no">​</a></h3>
+<p>You may wish to disable features that you don&#x27;t want to use, if they involve storing data in the browser or making network requests.</p>
+<ul>
+<li class="">To disable smart-sort (uses local storage), set <code>appConfig.disableSmartSort: true</code></li>
+<li class="">To disable update checks (makes external request to GH), set <code>appConfig.disableUpdateChecks: true</code></li>
+<li class="">To disable web search (redirect to external / internal content), set <code>appConfig.webSearch.disableWebSearch: true</code></li>
+<li class="">To keep status checks disabled (external / internal requests), set <code>appConfig.statusCheck: false</code></li>
+<li class="">To keep ping checks disabled (external / internal requests), set <code>appConfig.pingCheckEnabled: false</code></li>
+<li class="">To keep font-awesome icons disabled (external requests), set <code>appConfig.enableFontAwesome: false</code></li>
+<li class="">To keep error reporting disabled (external requests and data collection), set <code>appConfig.enableErrorReporting: false</code></li>
+<li class="">To keep the service worker disabled (stores cache of app in browser data), set <code>appConfig.enableServiceWorker: false</code></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="docker-images">Docker Images<a href="#docker-images" class="hash-link" aria-label="Direct link to Docker Images" title="Direct link to Docker Images" translate="no">​</a></h3>
+<p>The official image follows container best practices out of the box:</p>
+<ul>
+<li class="">Runs as a non-root user by default</li>
+<li class="">Minimal Alpine base, with npm removed from the final image to reduce the attack surface</li>
+<li class="">Multi-stage build, so only runtime files ship, with no build tooling or source</li>
+<li class="">Scanned with Trivy for known vulnerabilities before every publish</li>
+<li class="">Published to GHCR with signed build provenance and an attested SBOM, viewable on the <a href="https://github.com/lissy93/dashy/attestations" target="_blank" rel="noopener noreferrer" class="">attestations page</a></li>
+</ul>
+<p>To lock things down further, such as read-only volumes and dropped capabilities, see the <a class="" href="/docs/management#container-security">container security docs</a>.</p>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="threat-model">Threat Model<a href="#threat-model" class="hash-link" aria-label="Direct link to Threat Model" title="Direct link to Threat Model" translate="no">​</a></h2>
+<p>Dashy is a statically-hosted dashboard application, designed to be self-hosted on a private network. This threat model outlines the intended deployment context, trust boundaries, known risks and accepted trade-offs, to help users assess whether Dashy is appropriate for their environment.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="intended-deployment">Intended Deployment<a href="#intended-deployment" class="hash-link" aria-label="Direct link to Intended Deployment" title="Direct link to Intended Deployment" translate="no">​</a></h3>
+<p>Dashy is designed to run on a <strong>private local network</strong> (e.g. a home lab), accessed by a <strong>small number of trusted users</strong>. It is a convenience tool for organizing links to self-hosted services - it is not designed to protect sensitive resources or act as an access control layer.</p>
+<p>If exposed to the internet, Dashy <strong>must</strong> be placed behind a reverse proxy with server-side authentication (e.g. Authelia, Authentik, Cloudflare Access). The built-in client-side auth is a convenience feature for private networks, not a security boundary.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="trust-boundaries">Trust Boundaries<a href="#trust-boundaries" class="hash-link" aria-label="Direct link to Trust Boundaries" title="Direct link to Trust Boundaries" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Boundary</th><th>Trusted Side</th><th>Untrusted Side</th></tr></thead><tbody><tr><td>Local network</td><td>LAN users, self-hosted services</td><td>The public internet</td></tr><tr><td>Config file (<code>conf.yml</code>)</td><td>Server admin who writes the config</td><td>End users who view the dashboard</td></tr><tr><td>Browser storage</td><td>The current browser session</td><td>Other domains, other users of the same device</td></tr><tr><td>CORS proxy / status checks</td><td>Configured target URLs (set by admin)</td><td>Arbitrary URLs (if auth is not enabled)</td></tr></tbody></table>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="assets">Assets<a href="#assets" class="hash-link" aria-label="Direct link to Assets" title="Direct link to Assets" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Asset</th><th>Description</th><th>Storage</th></tr></thead><tbody><tr><td>Dashboard configuration</td><td>Service URLs, section layout, app settings</td><td><code>conf.yml</code> on server, optionally cached in browser localStorage</td></tr><tr><td>User credentials</td><td>SHA-256 password hashes, Keycloak/OIDC client IDs</td><td><code>conf.yml</code> on server</td></tr><tr><td>API keys</td><td>Keys for widget services (weather, stocks, etc.)</td><td><code>conf.yml</code> on server or environment variables</td></tr><tr><td>Auth tokens</td><td>Session token derived from credentials</td><td>Browser cookie (<code>dashyAuthToken</code>)</td></tr><tr><td>User preferences</td><td>Theme, layout, language, collapsed sections</td><td>Browser localStorage</td></tr></tbody></table>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="when-dashy-is-not-the-right-choice">When Dashy is NOT the Right Choice<a href="#when-dashy-is-not-the-right-choice" class="hash-link" aria-label="Direct link to When Dashy is NOT the Right Choice" title="Direct link to When Dashy is NOT the Right Choice" translate="no">​</a></h3>
+<ul>
+<li class="">You need a <strong>multi-tenant</strong> dashboard with per-user audit trails</li>
+<li class="">You are deploying on the <strong>public internet without a reverse proxy</strong></li>
+<li class="">Your dashboard contains <strong>secrets or credentials</strong> that must be protected from all users who can reach the server</li>
+<li class="">You require <strong>FIPS-compliant</strong> or <strong>SOC 2</strong> certified software</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="update--patch-policy">Update &amp; Patch Policy<a href="#update--patch-policy" class="hash-link" aria-label="Direct link to Update &amp; Patch Policy" title="Direct link to Update &amp; Patch Policy" translate="no">​</a></h2>
+<p>We follow Semantic Versioning for all releases. Security fixes are shipped as patch releases as quickly as possible and are published via immutable Git tags and Docker image tags. Users are encouraged to pin to a specific version in production and monitor releases on GitHub for security updates. The <code>:latest</code> Docker tag is provided for convenience but should not be relied on in production environments.</p>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="known-limitations">Known Limitations<a href="#known-limitations" class="hash-link" aria-label="Direct link to Known Limitations" title="Direct link to Known Limitations" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Report</th><th>Response</th></tr></thead><tbody><tr><td>&quot;Client-side auth can be bypassed via browser dev tools&quot;</td><td>Correct (only if neither <code>ENABLE_HTTP_AUTH</code> is set, nor any other auth mode). Client-side auth is a convenience for private networks, not a security boundary. Use server-side auth for untrusted environments.</td></tr><tr><td>&quot;CORS proxy can make requests to internal services&quot;</td><td>Correct. It is built to reach services on your network, and is behind auth when enabled. To turn it off entirely, set <code>DISABLE_PROXY_ENDPOINTS=true</code>.</td></tr><tr><td>&quot;Status checks can be used for SSRF&quot;</td><td>Target URLs are set by the admin in <code>conf.yml</code>, not end users, and the endpoint needs auth when enabled. Set <code>DISABLE_PROXY_ENDPOINTS=true</code> to disable it.</td></tr><tr><td>&quot;Password hashes are stored in plaintext in conf.yml&quot;</td><td>They are SHA-256 hashes, not plaintext passwords. The config file should be readable only by the server admin, and protected by HTTP auth when served.</td></tr><tr><td>&quot;localStorage/cookies are not encrypted&quot;</td><td>Browser storage is scoped to the origin and inaccessible to other domains. On a shared device, use your browser&#x27;s profile isolation.</td></tr><tr><td>&quot;No CSRF protection&quot;</td><td>Dashy&#x27;s state-changing operations (config save) are protected by auth middleware. CSRF is a low risk on a private network dashboard.</td></tr><tr><td>&quot;Docker container runs as root&quot;</td><td>It runs as the non-root <code>node</code> user by default. To lock it down further, drop capabilities or set a custom <code>--user</code>, see the <a class="" href="/docs/management#container-security">container security docs</a>.</td></tr><tr><td>&quot;Auth cookie is not HttpOnly/Secure&quot;</td><td>The token is needed by client-side JavaScript for auth state. On a private network over plain HTTP, the <code>Secure</code> flag would break auth. Use HTTPS + a reverse proxy to add these flags if needed.</td></tr><tr><td>&quot;Iframe/embed widget can load arbitrary URLs&quot;</td><td>The widget config is written by the server admin, not end users. If you don&#x27;t trust your config authors, disable the config editor with <code>disableConfiguration</code>.</td></tr><tr><td>&quot;RSS widget renders HTML content&quot;</td><td>RSS content is sanitized with DOMPurify before rendering. Script tags, event handlers and other dangerous elements are stripped.</td></tr><tr><td>&quot;No Content-Security-Policy headers&quot;</td><td>CSP should be configured at the reverse proxy layer, since the correct policy depends on which widgets and icon CDNs you use. Dashy can&#x27;t set a universal CSP that works for all configurations.</td></tr><tr><td>&quot;Config backups are not encrypted at rest&quot;</td><td>Backups are stored server-side alongside the original config. If an attacker has filesystem access, they already have <code>conf.yml</code>. Encryption at rest is the responsibility of the host OS/volume.</td></tr><tr><td>&quot;No rate limiting on endpoints&quot;</td><td>Rate limiting should be applied at the reverse proxy layer, where it can be tuned per-deployment. Dashy is not designed to be directly exposed to untrusted traffic.</td></tr><tr><td>&quot;A non-admin user can recompute an admin token under <code>ENABLE_HTTP_AUTH</code>&quot;</td><td>Correct. Any logged-in user can read the config and other users&#x27; hashes, so <code>admin</code> is not a hard boundary here. Use OIDC or Keycloak for real admin separation.</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="reporting-a-security-issue">Reporting a Security Issue<a href="#reporting-a-security-issue" class="hash-link" aria-label="Direct link to Reporting a Security Issue" title="Direct link to Reporting a Security Issue" translate="no">​</a></h2>
+<p>Please see our <a href="https://github.com/Lissy93/dashy/?tab=security-ov-file" target="_blank" rel="noopener noreferrer" class="">Security.md</a> doc for how to report issues.
+We have an actively monitored security mailbox supporting PGP, as well as a GitHub Advisories vulnerability reporting program.</p>
+<hr>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="non-issues">Non-Issues<a href="#non-issues" class="hash-link" aria-label="Direct link to Non-Issues" title="Direct link to Non-Issues" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="false-positives">False Positives<a href="#false-positives" class="hash-link" aria-label="Direct link to False Positives" title="Direct link to False Positives" translate="no">​</a></h3>
+<p>These are reported regularly, usually by automated scanners. Each has been checked and found not to be exploitable.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Report</th><th>Response</th></tr></thead><tbody><tr><td>Ping and status checks allow command injection</td><td>The host goes to pingman, which runs <code>spawn(&#x27;ping&#x27;, ...)</code> with no shell, so <code>;</code>, `</td></tr><tr><td>The CORS proxy can read arbitrary environment variables</td><td>Only <code>DASHY_</code>, <code>VITE_APP_</code> prefixes are read. The client <code>VITE_APP_</code> vars are already in the bundle, and <code>DASHY_</code> is opt-in. Unprefixed secrets stay unreachable.</td></tr><tr><td><code>enableInsecure</code> disables TLS certificate verification</td><td>Opt-in per status check, for internal services with self-signed certs, and it only affects that one request. Leave <code>statusCheckAllowInsecure</code> unset to keep verification on.</td></tr><tr><td>OIDC does not pin the JWT algorithm (alg confusion or <code>none</code>)</td><td>Verification uses a remote JWKS, so jose rejects none and symmetric algorithms. The issuer and group claims come from a signature-verified token, so a user cannot forge them.</td></tr><tr><td><code>yaml.load()</code> allows code execution on parse</td><td>In js-yaml 4.x (we use <code>^4.2.0</code>) <code>load</code> is the safe loader. It does not instantiate custom types, so parsing a config file cannot execute code.</td></tr><tr><td>Prototype pollution via the config API&#x27;s Object.assign</td><td><code>Object.assign</code> is a shallow set, so a <code>__proto__</code> key reparents only that object and is dropped on dump. <code>Object.prototype</code> is untouched, and the API is admin-gated behind <code>ENABLE_API</code>.</td></tr><tr><td>Path traversal via the config filename</td><td>The save and API write paths run <code>filename</code> through <code>path.basename()</code> and a <code>.yml</code>-only regex, so separators, <code>..</code> and null bytes are rejected and writes stay inside the data dir.</td></tr><tr><td>A committed .env file leaks secrets</td><td><code>.env</code> is a fully commented template with no real values. Real secrets go in <code>.env.local</code> (gitignored), and the Docker build copies an explicit allowlist, so <code>.env</code> never ships.</td></tr><tr><td>system-info and healthz disclose host details</td><td><code>system-info</code> is behind the same auth as every endpoint (open only in zero-auth mode). <code>healthz</code> is intentionally open for orchestrators, and version plus uptime is standard there.</td></tr><tr><td>The http to https redirect uses the <code>Host</code> header (open redirect)</td><td>A forged Host only redirects the attacker&#x27;s own request back to itself, so there is no cross-user effect. It is only active when you mount certs and enable the redirect.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="out-of-scope">Out-of-Scope<a href="#out-of-scope" class="hash-link" aria-label="Direct link to Out-of-Scope" title="Direct link to Out-of-Scope" translate="no">​</a></h3>
+<p>We do get a LOT of AI-submitted reports for things which come down to deployment decisions (e.g. not enabling auth).
+The following list is the most reported non-issues. They are out-of-scope, since they&#x27;re: 1. the expected behaviour,  2. already clearly documented, and 3. not exploitable in practice.</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="endpoints-are-unauthenticated">Endpoints are unauthenticated<a href="#endpoints-are-unauthenticated" class="hash-link" aria-label="Direct link to Endpoints are unauthenticated" title="Direct link to Endpoints are unauthenticated" translate="no">​</a></h4>
+<p>Dashy ships with no auth configured out-of-the-box. So until you enable or setup auth, all pages and endpoints will be reachable without credentials. That&#x27;s intentional, as it allows you to put Dashy behind your existing auth setup without hassle. Once an auth system of your choice has been (correctly) configured, all unauthenticated requests will then be rejected.</p>
+<p>✅ <strong>Solution</strong>: Enable authentication. See the <a href="https://dashy.to/docs/authentication/" target="_blank" rel="noopener noreferrer" class="">authentication docs</a> for instructions.</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-proxy--status--ping-can-reach-localhost-and-private-ips">The proxy / status / ping can reach localhost and private IPs<a href="#the-proxy--status--ping-can-reach-localhost-and-private-ips" class="hash-link" aria-label="Direct link to The proxy / status / ping can reach localhost and private IPs" title="Direct link to The proxy / status / ping can reach localhost and private IPs" translate="no">​</a></h4>
+<p>The CORS proxy, status-check and ping-check features are <em>meant</em> to reach internal and private addresses. Their use case is to let your widgets and service status checks talk the other services you have running within your LAN securely.</p>
+<p>These are opt-in requests (you configure widgets or other features to use them). But if you still don&#x27;t want the proxy reaching internal hosts, don&#x27;t expose it unauthenticated, or set firewall rules to control what can and cannot be called.</p>
+<p>✅ <strong>Solution</strong>: Configure firewall rules, or disable these endpoints entirely with the <code>DISABLE_PROXY_ENDPOINTS=true</code> env var</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="config-write-leads-to-stored-code-execution">Config write leads to stored code execution<a href="#config-write-leads-to-stored-code-execution" class="hash-link" aria-label="Direct link to Config write leads to stored code execution" title="Direct link to Config write leads to stored code execution" translate="no">​</a></h4>
+<p>Widgets execute user-controlled code. The code for these widgets live in your YAML config, which can be updated by admins with the config-manager save endpoint. It&#x27;s the expected functionality that admins can update the config, and add widgets here.</p>
+<p>✅ <strong>Solution</strong>: Enable auth, and set <code>appConfig.disableConfigurationForNonAdmin: true</code>. Or, disable config saving entirely with <code>appConfig.preventWriteToDisk: true</code></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/Lissy93/dashy/edit/master/docs/security.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2026-07-10T15:27:09.000Z" itemprop="dateModified">Jul 10, 2026</time></b> by <b>Liss-Bot</b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#contents" class="table-of-contents__link toc-highlight">Contents</a></li><li><a href="#dependencies" class="table-of-contents__link toc-highlight">Dependencies</a></li><li><a href="#securing-your-environment" class="table-of-contents__link toc-highlight">Securing your Environment</a></li><li><a href="#security-features" class="table-of-contents__link toc-highlight">Security Features</a><ul><li><a href="#verifiable-transparent-releases" class="table-of-contents__link toc-highlight">Verifiable Transparent Releases</a></li><li><a href="#supply-chain" class="table-of-contents__link toc-highlight">Supply Chain</a></li><li><a href="#subresource-integrity" class="table-of-contents__link toc-highlight">Subresource Integrity</a></li><li><a href="#ssl" class="table-of-contents__link toc-highlight">SSL</a></li><li><a href="#authentication" class="table-of-contents__link toc-highlight">Authentication</a></li><li><a href="#configuration-lockdown" class="table-of-contents__link toc-highlight">Configuration Lockdown</a></li><li><a href="#disabling-features" class="table-of-contents__link toc-highlight">Disabling Features</a></li><li><a href="#docker-images" class="table-of-contents__link toc-highlight">Docker Images</a></li></ul></li><li><a href="#threat-model" class="table-of-contents__link toc-highlight">Threat Model</a><ul><li><a href="#intended-deployment" class="table-of-contents__link toc-highlight">Intended Deployment</a></li><li><a href="#trust-boundaries" class="table-of-contents__link toc-highlight">Trust Boundaries</a></li><li><a href="#assets" class="table-of-contents__link toc-highlight">Assets</a></li><li><a href="#when-dashy-is-not-the-right-choice" class="table-of-contents__link toc-highlight">When Dashy is NOT the Right Choice</a></li></ul></li><li><a href="#update--patch-policy" class="table-of-contents__link toc-highlight">Update &amp; Patch Policy</a></li><li><a href="#known-limitations" class="table-of-contents__link toc-highlight">Known Limitations</a></li><li><a href="#reporting-a-security-issue" class="table-of-contents__link toc-highlight">Reporting a Security Issue</a></li><li><a href="#non-issues" class="table-of-contents__link toc-highlight">Non-Issues</a><ul><li><a href="#false-positives" class="table-of-contents__link toc-highlight">False Positives</a></li><li><a href="#out-of-scope" class="table-of-contents__link toc-highlight">Out-of-Scope</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Intro</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/lissy93/dashy" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://demo.dashy.to" target="_blank" rel="noopener noreferrer" class="footer__link-item">Live Demo<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/docs/quick-start">Quick Start</a></li><li class="footer__item"><a class="footer__link-item" href="/docs">Documentation</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Setup Guide</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/deployment">Deploying</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/configuring">Configuring</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/management">Management</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/troubleshooting">Troubleshooting</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Feature Docs Pt 1</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/authentication">Authentication</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/alternate-views">Alternate Views</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/backup-restore">Backup &amp; Restore</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/icons">Icons</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Feature Docs Pt 2</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/multi-language-support">Language Switching</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/status-indicators">Status Indicators</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/searching">Searching  &amp; Shortcuts</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/theming">Theming</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/developing">Developing</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/development-guides">Development Guides</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/contributing">Contributing</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/showcase">Showcase</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/credits">Credits</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Misc</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/privacy">Privacy &amp; Security</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/license">License</a></li><li class="footer__item"><a href="https://github.com/Lissy93/dashy/blob/master/.github/LEGAL.md" target="_blank" rel="noopener noreferrer" class="footer__link-item">Legal<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/Lissy93/dashy/blob/master/.github/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer" class="footer__link-item">Code of Conduct<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/Lissy93/dashy/blob/master/.github/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="footer__link-item">Changelog<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright"><a href="https://dashy.to">Dashy</a> - The Self-Hosted Dashboard for your Homelab<br>License under <a href="https://github.com/Lissy93/dashy/blob/master/LICENSE">MIT</a>. Copyright © 2026 <a href="https://aliciasykes.com">Alicia Sykes</a></div></div></div></footer></div>
+</body>
+</html>
