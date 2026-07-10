@@ -120,6 +120,16 @@ article div.markdown {
   }
 }
 
+/* Hide right-hand contents side-bar on narrower screens */
+@media (min-width: 997px) and (max-width: 1439px) {
+  .row .col.col--3:has(.theme-doc-toc-desktop) {
+    display: none;
+  }
+  .row .col[class*="docItemCol"] {
+    max-width: 100% !important;
+  }
+}
+
 /* Right-hand contents side-bar */
 ul.table-of-contents li {
   a {
