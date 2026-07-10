@@ -9,7 +9,7 @@ import getColor from '../utils/ui-helpers';
 import IconCloudSync from '../../static/icons/features_cloud-sync.svg';
 import IconDeploy from '../../static/icons/features_depoloyment.svg';
 // import IconIconography from '../../static/icons/features_icons.svg';
-// import IconLayout from '../../static/icons/features_layout-customization.svg';
+import IconLayout from '../../static/icons/features_layout-customization.svg';
 // import IconOpeningMethods from '../../static/icons/features_opening-methods.svg';
 // import IconShortcuts from '../../static/icons/features_shortcuts.svg';
 // import IconStatusIndicators from '../../static/icons/features_status-indicators.svg';
@@ -33,9 +33,12 @@ import IconQuickStart from '../../static/icons/docs_quick-start.svg';
 import IconAlternateViews from '../../static/icons/features_launching.svg';
 import IconShortcuts from '../../static/icons/features_shortcuts.svg';
 import IconSecurity from '../../static/icons/docs_security.svg';
+import IconPrivacy from '../../static/icons/docs_privacy.svg';
 import IconLegal from '../../static/icons/docs_legal.svg';
 import IconConduct from '../../static/icons/docs_conduct.svg';
 import IconChangelog from '../../static/icons/docs_changelog.svg';
+import IconApi from '../../static/icons/docs_api.svg';
+import IconReleaseWorkflow from '../../static/icons/docs_release-workflow.svg';
 
 const DocsLinks = [
   {
@@ -134,6 +137,18 @@ const DocsSections = [
         icon: (<IconInternationalization />),
       },
       {
+        title: 'Pages & Sections',
+        description: 'Multi-page support, sections, items and sub-items',
+        link: '/docs/pages-and-sections',
+        icon: (<IconLayout />),
+      },
+      {
+        title: 'REST API',
+        description: 'Programmatically read and update your config',
+        link: '/docs/api',
+        icon: (<IconApi />),
+      },
+      {
         title: 'Status Indicators',
         description: 'Monitoring uptime of your services with Dashy',
         link: '/docs/status-indicators',
@@ -192,15 +207,27 @@ const DocsSections = [
         link: '/docs/credits',
         icon: (<IconCredits />),
       },
+      {
+        title: 'Release Workflow',
+        description: 'Info about releases, CI and automated tasks',
+        link: '/docs/release-workflow',
+        icon: (<IconReleaseWorkflow />),
+      },
     ]
   },
   {
     section: 'Misc',
     items: [
       {
-        title: 'Privacy & Security',
-        description: 'Configure login and user control',
+        title: 'Privacy',
+        description: 'All network requests, data storage and handling',
         link: '/docs/privacy',
+        icon: (<IconPrivacy />),
+      },
+      {
+        title: 'Security',
+        description: 'Security features, threat model and hardening',
+        link: '/docs/security',
         icon: (<IconSecurity />),
       },
       {

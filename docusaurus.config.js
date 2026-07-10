@@ -1,8 +1,11 @@
+const fs = require('fs');
+const path = require('path');
 const { themes } = require('prism-react-renderer');
 const darkCodeTheme = themes.dracula;
 const lightCodeTheme = themes.github;
 const remarkGithubAlerts = require('./plugins/remark-github-alerts');
 const injectDeploymentGrid = require('./plugins/inject-deployment-grid');
+const { dashySidebar } = require('./sidebars');
 
 /* External URLs */
 const externalUrl = {
@@ -15,6 +18,41 @@ const externalUrl = {
 const footerText = `<a href="${externalUrl.dashyUrl}">Dashy</a> - The Self-Hosted Dashboard for your Homelab`
   + `<br />License under <a href="${externalUrl.licenseUrl}">MIT</a>. `
   + `Copyright © ${new Date().getFullYear()} <a href="${externalUrl.aliciaUrl}">Alicia Sykes</a>`;
+
+// A doc's footer label is its H1, matching what the sidebar shows
+const docTitle = (id) => {
+  try {
+    const raw = fs.readFileSync(path.join(__dirname, 'docs', `${id}.md`), 'utf-8');
+    const h1 = raw.match(/^#\s+(.+)/m);
+    if (h1) {
+      const title = h1[1].replace(/!\[.*?\]\(.*?\)|[*_`]|[^\x00-\x7F]/g, '').trim();
+      if (title) return title;
+    }
+  } catch (e) { /* fall through to generated label */ }
+  return id.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+};
+
+// Footer doc columns mirror the sidebar categories, long ones split in two
+const footerExtras = {
+  Community: [
+    { label: 'Code of Conduct', href: 'https://github.com/Lissy93/dashy/blob/master/.github/CODE_OF_CONDUCT.md' },
+  ],
+  Misc: [
+    { label: 'Changelog', to: '/updates' },
+  ],
+};
+const docFooterColumns = dashySidebar.flatMap(({ label: title, items: docs }) => {
+  const items = docs
+    .map((item) => (typeof item === 'string' ? item : item.link.id))
+    .map((id) => ({ label: docTitle(id), to: `/docs/${id}` }));
+  items.push(...(footerExtras[title] || []));
+  if (items.length <= 6) return [{ title, items }];
+  const mid = Math.ceil(items.length / 2);
+  return [
+    { title: `${title} Pt 1`, items: items.slice(0, mid) },
+    { title: `${title} Pt 2`, items: items.slice(mid) },
+  ];
+});
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -116,13 +154,13 @@ module.exports = {
     },
     metadata: [
       { name: 'keywords', content: 'dashy, dashboard, homelab, self-hosted, docker, homepage' },
-      { property: 'og:title', content: 'Dashy — The Ultimate Homepage for your Homelab' },
+      { property: 'og:title', content: 'Dashy - The Ultimate Homepage for your Homelab' },
       { property: 'og:description', content: 'Dashy is a self-hosted dashboard app for your homelab. Manage all your services, with status checks, widgets, themes and more.' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://dashy.to' },
       { property: 'og:image', content: 'https://dashy.to/img/dashy.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Dashy — The Ultimate Homepage for your Homelab' },
+      { name: 'twitter:title', content: 'Dashy - The Ultimate Homepage for your Homelab' },
       { name: 'twitter:description', content: 'Dashy is a self-hosted dashboard app for your homelab. Manage all your services, with status checks, widgets, themes and more.' },
       { name: 'twitter:image', content: 'https://dashy.to/img/dashy.png' },
     ],
@@ -167,53 +205,7 @@ module.exports = {
             // { label: 'Updates', to: '/updates' },
           ],
         },
-        {
-          title: 'Setup Guide',
-          items: [
-            { label: 'Deploying', to: '/docs/deployment' },
-            { label: 'Configuring', to: '/docs/configuring' },
-            { label: 'Management', to: '/docs/management' },
-            { label: 'Troubleshooting', to: '/docs/troubleshooting' },
-          ],
-        },
-        {
-          title: 'Feature Docs Pt 1',
-          items: [
-            { label: 'Authentication', to: '/docs/authentication' },
-            { label: 'Alternate Views', to: '/docs/alternate-views' },
-            { label: 'Backup & Restore', to: '/docs/backup-restore' },
-            { label: 'Icons', to: '/docs/icons' },
-          ],
-        },
-        {
-          title: 'Feature Docs Pt 2',
-          items: [
-            { label: 'Language Switching', to: '/docs/multi-language-support' },
-            { label: 'Status Indicators', to: '/docs/status-indicators' },
-            { label: 'Searching  & Shortcuts', to: '/docs/searching' },
-            { label: 'Theming', to: '/docs/theming' },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            { label: 'Developing', to: '/docs/developing' },
-            { label: 'Development Guides', to: '/docs/development-guides' },
-            { label: 'Contributing', to: '/docs/contributing' },
-            { label: 'Showcase', to: '/docs/showcase' },
-            { label: 'Credits', to: '/docs/credits' },
-          ],
-        },
-        {
-          title: 'Misc',
-          items: [
-            { label: 'Privacy & Security', to: '/docs/privacy' },
-            { label: 'License', to: '/docs/license' },
-            { label: 'Legal', href: 'https://github.com/Lissy93/dashy/blob/master/.github/LEGAL.md' },
-            { label: 'Code of Conduct', href: 'https://github.com/Lissy93/dashy/blob/master/.github/CODE_OF_CONDUCT.md' },
-            { label: 'Changelog', href: 'https://github.com/Lissy93/dashy/blob/master/.github/CHANGELOG.md' },
-          ],
-        },
+        ...docFooterColumns,
       ],
       copyright: footerText,
     },
