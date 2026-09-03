@@ -7,6 +7,15 @@
 
 ## Contents
 
+- [Config not loading](#config-not-loading)
+  - [You see the default dashboard instead of yours](#you-see-the-default-dashboard-instead-of-yours)
+  - [Failed to fetch configuration, status 404](#failed-to-fetch-configuration-server-responded-with-status-404)
+  - [Config came back after a permissions fix, but auth is ignored](#config-came-back-after-a-permissions-fix-but-auth-is-ignored)
+  - [Edits on the host never reach the container](#edits-on-the-host-never-reach-the-container)
+  - [Your browser shows an old config](#your-browser-shows-an-old-config)
+  - [Empty dashboard with "Login" in the title](#empty-dashboard-with-login-in-the-title)
+  - [Static hosting ignores config changes](#static-hosting-ignores-config-changes)
+  - [Nothing loads when Dashy is behind a sub-path](#nothing-loads-when-dashy-is-behind-a-sub-path)
 - [Config not saving](#config-not-saving)
   - [Permission denied or read-only filesystem](#permission-denied-or-read-only-filesystem-eacces-erofs)
   - [Kubernetes ConfigMap mount is read-only](#kubernetes-configmap-mount-is-read-only)
@@ -76,6 +85,7 @@
   - [Fixing Widget CORS Errors](#widget-cors-errors)
   - [CORS Proxy connect ECONNREFUSED or ENOTFOUND](#cors-proxy-connect-econnrefused--or-getaddrinfo-enotfound)
   - [CORS Proxy Target-URL host blocked or scheme rejected](#cors-proxy-target-url-host--is-blocked--must-use-http-or-https)
+  - [CORS Proxy TLS certificate errors](#cors-proxy-unable_to_verify_leaf_signature-or-err_tls_cert_altname_invalid)
   - [Widget Shows Error Incorrectly](#widget-shows-error-incorrectly)
   - [Weather Forecast Widget 401](#weather-forecast-widget-401)
   - [Widget Displaying Inaccurate Data](#widget-displaying-inaccurate-data)
@@ -87,6 +97,79 @@
   - [How to make a bug report](#how-to-make-a-bug-report)
   - [How-To Open Browser Console](#how-to-open-browser-console)
   - [Git Contributions not Displaying](#git-contributions-not-displaying)
+
+---
+
+## Config not loading
+
+The server reads `conf.yml` from `user-data/` on each request (that's `/app/user-data/` on Docker), which Dashy serves to the base of the domain (like `[your-dashy-instance]/conf.yml`). If you forget to pass in a config, or you put it in the wrong place, you'll see the default Dashy config.
+
+### You see the default dashboard instead of yours
+
+If the page reads "Welcome to your new dashboard!" with a Getting Started section, Dashy is serving the `conf.yml` that ships inside the image. Yours is mounted to the wrong place.
+
+Since v3.0.0 the config lives at `/app/user-data/conf.yml` (NOT `/app/public/conf.yml`)
+
+```bash
+docker run -d -p 8080:8080 -v ~/dashy/user-data:/app/user-data lissy93/dashy:latest
+```
+
+To see what the container is actually reading: `docker exec -it dashy head /app/user-data/conf.yml`
+
+### "Failed to fetch configuration: Server responded with status 404"
+
+`/app/user-data` is there, but it has no `conf.yml` in it. Usually a host directory got mounted over the top and is empty, or the file is named something else. The name of the root config has to be exactly `conf.yml`.
+
+A file that exists but can't be read by uid 1000 gives the same 404, so check [permissions](#permission-denied-or-read-only-filesystem-eacces-erofs) if the path looks right.
+
+Put the file in place before starting the container:
+
+```bash
+mkdir -p ~/dashy/user-data
+cp conf.yml ~/dashy/user-data/conf.yml
+```
+
+### Config came back after a permissions fix, but auth is ignored
+
+Restart the container after fixing permissions, even though the dashboard already looks repaired. Because auth is resolved once at startup, while `conf.yml` is re-read on every request. See [Permission denied or read-only filesystem](#permission-denied-or-read-only-filesystem-eacces-erofs) for the ownership side, including Synology, NAS and SELinux cases.
+
+```bash
+sudo chown -R 1000:1000 ~/dashy/user-data
+docker restart dashy
+```
+
+### Edits on the host never reach the container
+
+You changed `conf.yml`, restarted, and nothing moved. This is the classic single-file bind mount problem. Most editors save by writing a new file and renaming it over the old one, which breaks the mount's link to the original inode.
+
+Mount the parent directory rather than the file:
+
+```yaml
+volumes:
+  - ./user-data:/app/user-data
+```
+
+Also check the host side is a real path. A bare name with no `/` or `./` in front is a named volume, not a bind mount.
+
+### Your browser shows an old config
+
+Try opening in a private window, do you see the new one now? If so, this is some local settings you've set. Just clear it from Dashy's config menu under Config --> "Reset Local Settings". See [How to Reset Local Settings](#how-to-reset-local-settings).
+
+If the private window is stale too, and you have `appConfig.enableServiceWorker: true`, the PWA cache is serving an old copy. Unregister the worker under the Application tab in devtools, then reload.
+
+### Empty dashboard with "Login" in the title
+
+This one is intentional. With auth configured and no session yet, the server sends a cut-down config containing only what the login screen needs. Your sections come back once you're signed in. If you do sign in and it's still empty, the problem is auth rather than config. See [Auth & OIDC](#auth--oidc).
+
+### Static hosting ignores config changes
+
+On Netlify, Vercel, GitHub Pages and similar there's no Dashy server, so `conf.yml` gets copied into `dist/` at build time. Editing it afterwards does nothing until you build again. Commit your change to `user-data/conf.yml` and let the host rebuild, or run `yarn build` locally.
+
+### Nothing loads when Dashy is behind a sub-path
+
+Serve Dashy at `example.com/dashy` and the browser still requests `example.com/conf.yml`. The config path is fixed at build time as `/conf.yml`, and `BASE_URL` doesn't apply to it, so a proxy forwarding only `/dashy/*` never sees the request.
+
+Give Dashy its own hostname or subdomain, or build from source with `VITE_APP_CONFIG_PATH` set to the full path. Any `VITE_` variable is read during the build, so setting one on the prebuilt Docker image won't do anything.
 
 ---
 
@@ -834,6 +917,10 @@ DANGEROUSLY_DISABLE_PROXY_RESTRICTIONS=true
 The variable is named so loudly because flipping it on a Dashy instance that's exposed to anything other than fully trusted users re-opens the SSRF surface - anyone who can hit `/cors-proxy` can then use Dashy as a relay to reach internal services. **Don't set it on cloud-hosted or internet-exposed deployments.**
 
 Note that this is an all-or-nothing escape hatch, not a per-host allowlist. If you only need to reach one specific host that's currently blocked, please open a feature request describing the use case.
+
+### CORS Proxy `UNABLE_TO_VERIFY_LEAF_SIGNATURE` or `ERR_TLS_CERT_ALTNAME_INVALID`
+
+The target's certificate can't be verified - it's self-signed, issued by a private CA, or issued for a different hostname than the one you're requesting. If you trust the host, add `allowInsecure: true` to the widget (`useProxy: true` is needed too). To keep verification on instead, mount your CA into the container and point `NODE_EXTRA_CA_CERTS` at it. See [Ignoring Certificate Errors](/docs/widgets#ignoring-certificate-errors).
 
 ### Widget Shows Error Incorrectly
 

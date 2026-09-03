@@ -49,6 +49,7 @@ The following file provides a reference of all supported configuration options.
 - [**Notes**](#notes)
   - [Editing Config through the UI](#editing-config-through-the-ui)
   - [About YAML](#about-yaml)
+  - [Schema Validation in your Editor](#schema-validation-in-your-editor)
   - [Config Saving Methods](#config-saving-methods)
   - [Preventing Changes](#preventing-changes)
   - [Example](#example)
@@ -212,6 +213,7 @@ For more info, see the **[Authentication Docs](/docs/authentication)**
 **`adminRole`** | `string` | _Optional_ | The role that will be considered as admin.
 **`adminGroup`** | `string` | _Optional_ | The group that will be considered as admin.
 **`scope`** | `string` | Required | The scope(s) to request from the OIDC provider
+**`showLoginPage`** | `boolean` | _Optional_ | Set to `true` to redirect to Dashy's login page, instead of your OIDC auth page
 **`enableSilentRenew`** | `boolean` | _Optional_ | If set to `true`, your session is silently renewed in the background before it expires (only works for providers which support the `offline_access` scope)
 **`postLogoutRedirectUri`** | `string` | _Optional_ | URL to send users back to after logging out at the provider (sent as `post_logout_redirect_uri`). Must be registered as a valid post-logout redirect URI with your provider. If unset, no redirect is requested
 **`allowedIssuers`** | `array` | _Optional_ | List of issuer URLs to accept tokens from. Needed for multi-tenant providers (e.g. Microsoft Entra) where the token issuer differs from the configured `endpoint`. If unset, the issuer from the discovery document is used
@@ -313,6 +315,7 @@ For more info, see the **[Authentication Docs](/docs/authentication)**
 **`options`** | `object` | _Optional_ | Some widgets accept either optional or required additional options. Again, see the [Widget Docs](/docs/widgets) for full list of options
 **`updateInterval`** | `number` | _Optional_ | You can keep a widget constantly updated by specifying an update interval, in seconds. See [Continuous Updates Docs](/docs/widgets#continuous-updates) for more info
 **`useProxy`** | `boolean` | _Optional_ | Some widgets make API requests to services that are not CORS-enabled. For these instances, you will need to route requests through a proxy, Dashy has a built in CORS-proxy, which you can use by setting this option to `true`. Defaults to `false`. See the [Proxying Requests Docs](/docs/widgets#proxying-requests) for more info
+**`allowInsecure`** | `boolean` | _Optional_ | Skip TLS certificate verification for this widget's proxied requests, for targets with a self-signed or mismatched certificate. Defaults to `false`. See the [Ignoring Certificate Errors Docs](/docs/widgets#ignoring-certificate-errors) for more info
 **`timeout`** | `number` | _Optional_ | Request timeout in milliseconds, defaults to ½ a second (`500`)
 **`ignoreErrors`** | `boolean` | _Optional_ | Prevent an error message being displayed, if a network request or something else fails. Useful for false-positives
 **`label`** | `string` | _Optional_ | Add custom label to a given widget. Useful for identification, if there are multiple of the same type of widget in a single section
@@ -400,6 +403,26 @@ Config can be modified directly through the UI, and then written to disk, or app
 ### About YAML
 
 If you're new to YAML, it's pretty straight-forward. The format is exactly the same as that of JSON, but instead of using curly braces, structure is denoted using whitespace. This [quick guide](https://linuxhandbook.com/yaml-basics/) should get you up to speed in a few minutes, for more advanced topics take a look at this [Wikipedia article](https://en.wikipedia.org/wiki/YAML).
+
+### Schema Validation in your Editor
+
+Dashy's config is described by a [JSON schema](https://github.com/Lissy93/dashy/blob/master/src/utils/config/ConfigSchema.json) (and served up at `[your-dashy-instance.local]/schema.json`).
+
+Most editors can use this to give you validation, auto-complete and inline docs as you type, so long as you have the `$schema` key pointing to the schema URL.
+
+If you have the [YAML Language Server](https://github.com/redhat-developer/yaml-language-server) in your editor (which comes with the YAML extension), then you can also add the schema directly. E.g. for VS Code, put the following in your `settings.json`.
+
+```json
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/Lissy93/dashy/master/src/utils/config/ConfigSchema.json": ["conf.yml", "user-data/*.yml"]
+  }
+}
+```
+
+The built-in YAML editor (under Config --> Edit Config) also has live validation and auto-complete from the schema.
+
+<img width="700" src="https://pixelflare.cc/alicia/dashy/yaml-editor" alt="YAML editor screenshot" />
 
 ### Config Saving Methods
 
