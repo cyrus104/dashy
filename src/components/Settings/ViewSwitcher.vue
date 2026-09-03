@@ -2,17 +2,17 @@
 <div class="view-switcher">
   <ul>
     <li>
-      <router-link :to="pathFor('home')">
+      <router-link :to="pathFor('home')" @click="rememberView('home')">
         <IconHome /><span>{{ $t('alternate-views.default') }}</span>
       </router-link>
     </li>
     <li>
-      <router-link :to="pathFor('minimal')">
+      <router-link :to="pathFor('minimal')" @click="rememberView('minimal')">
         <IconMinimalView /><span>{{ $t('alternate-views.minimal') }}</span>
       </router-link>
     </li>
     <li>
-      <router-link :to="pathFor('workspace')">
+      <router-link :to="pathFor('workspace')" @click="rememberView('workspace')">
         <IconWorkspaceView /><span>{{ $t('alternate-views.workspace') }}</span>
       </router-link>
     </li>
@@ -24,7 +24,9 @@
 import IconHome from '@/assets/interface-icons/application-home.svg';
 import IconWorkspaceView from '@/assets/interface-icons/open-workspace.svg';
 import IconMinimalView from '@/assets/interface-icons/application-minimal.svg';
-import { makeRoutePath, resolveRouteIntent } from '@/utils/config/ConfigHelpers';
+import {
+  makeRoutePath, resolveRouteIntent, rememberStartingView,
+} from '@/utils/config/ConfigHelpers';
 
 export default {
   components: {
@@ -37,6 +39,9 @@ export default {
     pathFor(view) {
       const { pageId, sectionSlug } = resolveRouteIntent(this.$route, this.$store);
       return makeRoutePath(view, pageId, sectionSlug);
+    },
+    rememberView(view) {
+      rememberStartingView(view);
     },
   },
 };

@@ -47,6 +47,7 @@ export const clearScopedLocalConfig = (pages) => {
   };
   clearScope(null);
   localStorage.removeItem(localStorageKeys.CONF_PAGES);
+  localStorage.removeItem(localStorageKeys.STARTING_VIEW);
   (pages || []).forEach((page) => {
     if (page?.name) clearScope(makePageName(page.name));
   });
@@ -57,6 +58,29 @@ export const VIEW_META = {
   home: { supportsSection: true },
   minimal: { supportsSection: true },
   workspace: { supportsSection: false },
+};
+
+/* Normalise a view name, mapping the legacy 'default' alias onto 'home'.
+ * Returns undefined for anything that isn't a real view. */
+const asView = (raw) => {
+  if (!raw) return undefined;
+  const view = raw === 'default' ? 'home' : raw;
+  return VIEW_META[view] ? view : undefined;
+};
+
+/* Which view to land on at '/'. The view the user last picked from the
+ * switcher is remembered in their own browser and wins over the shared
+ * appConfig.startingView, matching how their theme and layout picks behave.
+ * Anything unrecognised is ignored rather than allowed to break routing. */
+export const resolveStartingView = (storedView, configuredView) =>
+  asView(storedView) || asView(configuredView) || 'home';
+
+/* Remember the view this user just picked, so '/' lands there for them next
+ * time. Only called on an explicit pick from the view switcher - following a
+ * link to /minimal shouldn't quietly rewrite someone's landing view. */
+export const rememberStartingView = (view) => {
+  const valid = asView(view);
+  if (valid) localStorage.setItem(localStorageKeys.STARTING_VIEW, valid);
 };
 
 /* How a URL's :page segment resolves against the current config */

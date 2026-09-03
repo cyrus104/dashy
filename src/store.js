@@ -6,6 +6,7 @@ import {
   makePageName, formatConfigPath, componentVisibility, configScope, stripRootOwnedFields,
 } from '@/utils/config/ConfigHelpers';
 import { applyItemId, mapSectionByName, stripItemIds } from '@/utils/config/SectionHelpers';
+import { patchAppConfigField } from '@/utils/config/AppConfigPatch';
 import filterUserSections from '@/utils/CheckSectionVisibility';
 import ErrorHandler, { InfoHandler, InfoKeys } from '@/utils/logging/ErrorHandler';
 import {
@@ -80,17 +81,6 @@ const commitConfigField = (state, field, value) => {
   const isSections = field === 'sections';
   state.config = { ...state.config, [field]: isSections ? applyItemId(value) : value };
   state.configSource = { ...state.configSource, [field]: isSections ? stripItemIds(value) : value };
-};
-
-/* Patch a single appConfig key. Optionally persists to a localStorage slot
- * (used by the quick-pickers; omitted for pure runtime-state updates). */
-const patchAppConfigField = (state, key, value, storageKey) => {
-  state.config = { ...state.config, appConfig: { ...state.config.appConfig, [key]: value } };
-  state.configSource = {
-    ...state.configSource,
-    appConfig: { ...(state.configSource.appConfig || {}), [key]: value },
-  };
-  if (storageKey) localStorage.setItem(storageKey, value);
 };
 
  /* Read locally saved configs/overrides from localStorage  */
