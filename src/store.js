@@ -6,6 +6,7 @@ import {
   makePageName, formatConfigPath, componentVisibility, configScope, stripRootOwnedFields,
 } from '@/utils/config/ConfigHelpers';
 import { applyItemId, mapSectionByName, stripItemIds } from '@/utils/config/SectionHelpers';
+import { patchAppConfigField } from '@/utils/config/AppConfigPatch';
 import filterUserSections from '@/utils/CheckSectionVisibility';
 import ErrorHandler, { InfoHandler, InfoKeys } from '@/utils/logging/ErrorHandler';
 import {
@@ -80,22 +81,6 @@ const commitConfigField = (state, field, value) => {
   const isSections = field === 'sections';
   state.config = { ...state.config, [field]: isSections ? applyItemId(value) : value };
   state.configSource = { ...state.configSource, [field]: isSections ? stripItemIds(value) : value };
-};
-
-/* Patch a single appConfig key. A storageKey marks a personal display
- * preference (theme, layout, item size, language): those are saved to this
- * browser only, and deliberately kept out of configSource, so that saving
- * the config to disk can't push one user's choice out to everyone. */
-const patchAppConfigField = (state, key, value, storageKey) => {
-  state.config = { ...state.config, appConfig: { ...state.config.appConfig, [key]: value } };
-  if (storageKey) {
-    localStorage.setItem(storageKey, value);
-    return;
-  }
-  state.configSource = {
-    ...state.configSource,
-    appConfig: { ...(state.configSource.appConfig || {}), [key]: value },
-  };
 };
 
  /* Read locally saved configs/overrides from localStorage  */
