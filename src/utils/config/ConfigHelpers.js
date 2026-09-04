@@ -60,27 +60,21 @@ export const VIEW_META = {
   workspace: { supportsSection: false },
 };
 
-/* Normalise a view name, mapping the legacy 'default' alias onto 'home'.
- * Returns undefined for anything that isn't a real view. */
+/* Normalise a view name ('default' is a legacy alias for 'home'), or
+ * undefined if it isn't a real view */
 const asView = (raw) => {
-  if (!raw) return undefined;
   const view = raw === 'default' ? 'home' : raw;
   return VIEW_META[view] ? view : undefined;
 };
 
-/* Which view to land on at '/'. The view the user last picked from the
- * switcher is remembered in their own browser and wins over the shared
- * appConfig.startingView, matching how their theme and layout picks behave.
- * Anything unrecognised is ignored rather than allowed to break routing. */
+/* Which view to land on at '/'. A view the user picked from the switcher is
+ * remembered in their own browser, and wins over appConfig.startingView */
 export const resolveStartingView = (storedView, configuredView) =>
   asView(storedView) || asView(configuredView) || 'home';
 
-/* Remember the view this user just picked, so '/' lands there for them next
- * time. Only called on an explicit pick from the view switcher - following a
- * link to /minimal shouldn't quietly rewrite someone's landing view. */
+/* Remember an explicitly picked view, so '/' lands there for this user next time */
 export const rememberStartingView = (view) => {
-  const valid = asView(view);
-  if (valid) localStorage.setItem(localStorageKeys.STARTING_VIEW, valid);
+  if (asView(view)) localStorage.setItem(localStorageKeys.STARTING_VIEW, view);
 };
 
 /* How a URL's :page segment resolves against the current config */

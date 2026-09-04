@@ -149,7 +149,6 @@ export default {
       const { pageId, sectionSlug } = resolveRouteIntent(this.$route, this.$store);
       return makeRoutePath(view, pageId, sectionSlug);
     },
-    /* Remember an explicitly picked view, so '/' lands there next time */
     pickView(view) {
       rememberStartingView(view);
       this.close();
