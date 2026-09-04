@@ -82,15 +82,20 @@ const commitConfigField = (state, field, value) => {
   state.configSource = { ...state.configSource, [field]: isSections ? stripItemIds(value) : value };
 };
 
-/* Patch a single appConfig key. Optionally persists to a localStorage slot
- * (used by the quick-pickers; omitted for pure runtime-state updates). */
+/* Patch a single appConfig key. A storageKey marks a personal display
+ * preference (theme, layout, item size, language): those are saved to this
+ * browser only, and deliberately kept out of configSource, so that saving
+ * the config to disk can't push one user's choice out to everyone. */
 const patchAppConfigField = (state, key, value, storageKey) => {
   state.config = { ...state.config, appConfig: { ...state.config.appConfig, [key]: value } };
+  if (storageKey) {
+    localStorage.setItem(storageKey, value);
+    return;
+  }
   state.configSource = {
     ...state.configSource,
     appConfig: { ...(state.configSource.appConfig || {}), [key]: value },
   };
-  if (storageKey) localStorage.setItem(storageKey, value);
 };
 
  /* Read locally saved configs/overrides from localStorage  */
