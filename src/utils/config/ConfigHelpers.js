@@ -47,6 +47,7 @@ export const clearScopedLocalConfig = (pages) => {
   };
   clearScope(null);
   localStorage.removeItem(localStorageKeys.CONF_PAGES);
+  localStorage.removeItem(localStorageKeys.STARTING_VIEW);
   (pages || []).forEach((page) => {
     if (page?.name) clearScope(makePageName(page.name));
   });
@@ -57,6 +58,23 @@ export const VIEW_META = {
   home: { supportsSection: true },
   minimal: { supportsSection: true },
   workspace: { supportsSection: false },
+};
+
+/* Normalise a view name ('default' is a legacy alias for 'home'), or
+ * undefined if it isn't a real view */
+const asView = (raw) => {
+  const view = raw === 'default' ? 'home' : raw;
+  return VIEW_META[view] ? view : undefined;
+};
+
+/* Which view to land on at '/'. A view the user picked from the switcher is
+ * remembered in their own browser, and wins over appConfig.startingView */
+export const resolveStartingView = (storedView, configuredView) =>
+  asView(storedView) || asView(configuredView) || 'home';
+
+/* Remember an explicitly picked view, so '/' lands there for this user next time */
+export const rememberStartingView = (view) => {
+  if (asView(view)) localStorage.setItem(localStorageKeys.STARTING_VIEW, view);
 };
 
 /* How a URL's :page segment resolves against the current config */

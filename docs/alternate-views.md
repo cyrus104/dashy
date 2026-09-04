@@ -8,7 +8,7 @@ Dashy has three different views:
 - Workspace View - Items displayed on the side, and are launched within Dashy
 - Minimal View - A clean + simple tabbed view
 
-You can switch between views using the dropdown in the top-right corner. Set your chosen Starting View with `appConfig.startingView`. Click the page title at any time to go back to your selected starting view.
+You can switch between views using the dropdown in the top-right corner. Set your chosen Starting View with `appConfig.startingView`. The view you pick is remembered in your own browser and takes precedence over `appConfig.startingView`, so people sharing a dashboard each land on the view they chose. Clear it with Config --> Reset Local Settings. Click the page title at any time to go back to your selected starting view.
 
 ### Default
 

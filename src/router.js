@@ -19,8 +19,10 @@ import { isAuthEnabled, isLoggedIn, isGuestAccessEnabled } from '@/utils/auth/Au
 import { isOidcEnabled } from '@/utils/auth/OidcAuth';
 import { isKeycloakEnabled } from '@/utils/auth/KeycloakAuth';
 import { isHeaderAuthEnabled } from '@/utils/auth/HeaderAuth';
-import { startingView as defaultStartingView, routePaths } from '@/utils/config/defaults';
-import { VIEW_META } from '@/utils/config/ConfigHelpers';
+import {
+  startingView as defaultStartingView, routePaths, localStorageKeys,
+} from '@/utils/config/defaults';
+import { resolveStartingView } from '@/utils/config/ConfigHelpers';
 import ErrorHandler from '@/utils/logging/ErrorHandler';
 
 const progress = new Progress({ color: 'var(--progress-bar)' });
@@ -44,12 +46,12 @@ const isOauthCallback = () =>
   new URLSearchParams(window.location.search).has('code')
   && (isOidcEnabled() || isKeycloakEnabled());
 
-/* Resolve landing view from appConfig.startingView at runtime if set */
-const resolveStartingView = () => {
-  const raw = store.state.config?.appConfig?.startingView || defaultStartingView;
-  const view = raw === 'default' ? 'home' : raw;
-  return VIEW_META[view] ? view : 'home';
-};
+/* Resolve landing view: the user's own remembered pick first, then
+ * appConfig.startingView, then the default */
+const landingView = () => resolveStartingView(
+  localStorage.getItem(localStorageKeys.STARTING_VIEW),
+  store.state.config?.appConfig?.startingView || defaultStartingView,
+);
 
 /* Build the canonical /<view>/:page?/:section? routes for a given view + component.
  * withSection=false for workspace (no single-section view yet). Page meta is
@@ -86,7 +88,7 @@ const router = createRouter({
       name: 'landing',
       component: Home,
       beforeEnter: (to, from, next) => {
-        const view = resolveStartingView();
+        const view = landingView();
         if (!view || view === 'home') next();
         // If user set `startingView`, we redirect to canonical /<view> URL
         else next(`/${view}`);

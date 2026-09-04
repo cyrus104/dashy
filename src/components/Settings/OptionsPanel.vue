@@ -61,7 +61,7 @@
         class="view-btn"
         :class="{ 'is-active': currentView === v.id }"
         v-tooltip="v.label"
-        @click="close"
+        @click="pickView(v.id)"
       >
         <component :is="v.icon" />
         <span>{{ v.label }}</span>
@@ -83,7 +83,9 @@ import AuthButtons from '@/components/Settings/AuthButtons';
 import Keys from '@/utils/StoreMutations';
 import { modalNames } from '@/utils/config/defaults';
 import { getUserState } from '@/utils/auth/Auth';
-import { makeRoutePath, resolveRouteIntent, viewFromPath } from '@/utils/config/ConfigHelpers';
+import {
+  makeRoutePath, resolveRouteIntent, viewFromPath, rememberStartingView,
+} from '@/utils/config/ConfigHelpers';
 import IconClose from '@/assets/interface-icons/config-close.svg';
 import IconEdit from '@/assets/interface-icons/interactive-editor-edit-mode.svg';
 import IconConfig from '@/assets/interface-icons/config-editor.svg';
@@ -146,6 +148,10 @@ export default {
     pathFor(view) {
       const { pageId, sectionSlug } = resolveRouteIntent(this.$route, this.$store);
       return makeRoutePath(view, pageId, sectionSlug);
+    },
+    pickView(view) {
+      rememberStartingView(view);
+      this.close();
     },
   },
 };

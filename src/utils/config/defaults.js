@@ -148,6 +148,7 @@ const defaults = {
     ISADMIN: 'isAdmin',
     ID_TOKEN: 'idToken',
     DISABLE_CRITICAL_WARNING: 'disableCriticalWarning',
+    STARTING_VIEW: 'startingView',
   },
   /* Key names for cookie identifiers */
   cookieKeys: {
